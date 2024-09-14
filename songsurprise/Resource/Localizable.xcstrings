@@ -1,0 +1,86 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "genre.chose" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chose Genre"
+          }
+        }
+      }
+    },
+    "order.chose_track" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chose track"
+          }
+        }
+      }
+    },
+    "order.chose_track.desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chose your track. Or let us create exclusive track for you. Our library is growing by the day."
+          }
+        }
+      }
+    },
+    "order.pay_once" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pay once, love forever"
+          }
+        }
+      }
+    },
+    "order.pay_once.desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not another annoying subscription. Get lifetime access to your track in all major streaming platforms."
+          }
+        }
+      }
+    },
+    "order.record_audio" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record audio message"
+          }
+        }
+      }
+    },
+    "order.record_audio.desc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use your micro to record your audio message. Then add your picture for Album cover."
+          }
+        }
+      }
+    },
+    "order.reusable_header" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To order track please complete items below"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
