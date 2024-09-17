@@ -94,11 +94,11 @@ class PlayerController: UIViewController {
         
         titleLabel.centerXconstraint(for: view)
         detailsLabel.centerXconstraint(for: view)
-        titleLabel.constraints(top: coverAlbum.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 35, left: 0, bottom: 0, right: 0))
+        titleLabel.constraints(top: coverAlbum.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 15, left: 0, bottom: 0, right: 0))
         detailsLabel.constraints(top: titleLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 15, left: 0, bottom: 0, right: 0))
         
         
-        durationSlider.constraints(top: detailsLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 35, left: 10, bottom: 0, right: 15), size: .init(width: 0, height: 35))
+        durationSlider.constraints(top: detailsLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 20, left: 10, bottom: 0, right: 15), size: .init(width: 0, height: 35))
         durationView.constraints(top: durationSlider.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 5, left: 10, bottom: 0, right: 15), size: .init(width: 0, height: 25))
         durationView.addSubviews(startTimeLabel, endTimeLabel)
         startTimeLabel.constraints(top: nil, leading: durationView.leadingAnchor, bottom: nil, trailing: nil)
@@ -107,9 +107,9 @@ class PlayerController: UIViewController {
         endTimeLabel.constraints(top: nil, leading: nil, bottom: nil, trailing: durationView.trailingAnchor)
         
         playPauseButton.centerXconstraint(for: view)
-        playPauseButton.constraints(top: durationView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 45, left: 0, bottom: 0, right: 0), size: .init(width: 70, height: 70))
-        backButton.constraints(top: durationView.bottomAnchor, leading: nil, bottom: nil, trailing: playPauseButton.leadingAnchor, padding: .init(top: 45, left: 0, bottom: 0, right: 45), size: .init(width: 70, height: 70))
-        nextButton.constraints(top: durationView.bottomAnchor, leading: playPauseButton.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 45, left: 45, bottom: 0, right: 0), size: .init(width: 70, height: 70))
+        playPauseButton.constraints(top: durationView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 30, left: 0, bottom: 0, right: 0), size: .init(width: 70, height: 70))
+        backButton.constraints(top: durationView.bottomAnchor, leading: nil, bottom: nil, trailing: playPauseButton.leadingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 45), size: .init(width: 70, height: 70))
+        nextButton.constraints(top: durationView.bottomAnchor, leading: playPauseButton.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 30, left: 45, bottom: 0, right: 0), size: .init(width: 70, height: 70))
         
         durationSlider.onEditingChanged = { isEditing in
             if let player = self.player {
@@ -120,16 +120,26 @@ class PlayerController: UIViewController {
             }
         }
         
-        submitButton.constraints(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 25, bottom: 25, right: 25), size: .init(width: 0, height: 35))
+        submitButton.constraints(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 25, bottom: 20, right: 25), size: .init(width: 0, height: 35))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configurePlayer()
+        guard let player = player else {
+            configurePlayer()
+            return
+        }
+        
+        didTapPlayPauseButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        didTapPlayPauseButton()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         stopTimer()
     }
     
@@ -231,6 +241,7 @@ class PlayerController: UIViewController {
     @objc
     func handleSubmitButton() {
         UserDefaults.standard.setValue(tracks[index].id, forKey: "userSelectedTrackId")
+        UserDefaults.standard.setValue("\(tracks[index].artistName) - \(tracks[index].trackName)", forKey: "userSelectedTrackName")
         UserDefaults.standard.synchronize()
         stopTimer()
         dismiss(animated: true)

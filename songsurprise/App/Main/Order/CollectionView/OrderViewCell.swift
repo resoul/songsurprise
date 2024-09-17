@@ -46,12 +46,22 @@ final class OrderViewCell: UICollectionViewCell {
         headerLabel.constraints(top: topAnchor, leading: iconView.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 10, left: 10, bottom: 0, right: 0), size: .init(width: 0, height: 50))
         descriptionLabel.constraints(top: headerLabel.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 10, left: 10, bottom: 0, right: 10))
         bottomView.constraints(top: descriptionLabel.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 15, left: 10, bottom: 0, right: 10))
+        bottomView.isHidden = true
     }
     
     func configure(order: OrderModel) {
         headerLabel.text = order.title
         iconView.image = UIImage(named: order.icon)
         descriptionLabel.text = order.description
+    }
+    
+    func configureBottomView(index: Int) {
+        if index == 0 && UserDefaults.standard.integer(forKey: "userSelectedTrackId") != 0, let text = UserDefaults.standard.string(forKey: "userSelectedTrackName") {
+            bottomView.isHidden = false
+            bottomView.configure(text)
+        } else {
+            bottomView.isHidden = true
+        }
     }
     
     override func layoutSubviews() {

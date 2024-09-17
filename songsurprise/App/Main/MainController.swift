@@ -78,6 +78,7 @@ extension MainController: CollectionViewProvider {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: OrderViewCell.self, for: indexPath)
         cell.configure(order: orderViewModel.items[indexPath.row])
+        cell.configureBottomView(index: indexPath.row)
         
         return cell
     }
